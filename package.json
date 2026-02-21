@@ -10,7 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "tronweb": "^6.2.0",
     "zeromq": "^5.3.1"
   }
 }
