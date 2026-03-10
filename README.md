@@ -22,13 +22,15 @@ You can extend the same pattern to **contract logs** (for TRC20 deposits like US
 ## 2) Requirements
 
 ### FullNode side
+
 - A Java-tron FullNode running on **Nile** with an up-to-date DB (snapshot strongly recommended on Nile)
 - `event.subscribe` configured with `useNativeQueue = true`
 - Node started with the `--es` flag (event service is disabled by default)
 
 ### Subscriber side
+
 - Node.js 20+
-- `zeromq@5` (important: the `zmq.socket('sub')` API is from zeromq v5)
+- `zeromq@6` 
 
 ---
 
@@ -55,7 +57,7 @@ npm install
 
 This repo uses:
 
-- `zeromq@^5.3.1`
+- `zeromq@^6.5.0`
 
 ---
 
@@ -99,6 +101,7 @@ event.subscribe = {
 ```
 
 Notes:
+
 - `bindport = 5555` means subscribers connect to `tcp://127.0.0.1:5555`.
 - Start small (block/transaction). Enable more triggers later.
 
@@ -200,19 +203,18 @@ curl -s -X POST http://127.0.0.1:8090/wallet/gettransactioninfobyid \
 
 - TRC20 transfers usually produce at least one log (`Transfer`).
 
-
 ## 9) Snapshot bootstrap (recommended on Nile)
 
 If your local height is extremely low compared to public Nile, syncing will take a very long time.
-The practical solution is to bootstrap from a **recent Nile DB snapshot** and start the node from that DB.
-
+The practical solution is to bootstrap from a **recent Nile DB [snapshot](https://database.nileex.io/#)** and start the node from that DB.
 
 ## References (official docs)
-- Java-tron Event Subscription (ZeroMQ, `--es`, `bindport`, topics): https://tronprotocol.github.io/documentation-en/architecture/event/
-- TRONGrid endpoints (Mainnet/Shasta/Nile): https://developers.tron.network/v4.7.3/docs/exchangewallet-integrate-with-the-tron-network
 
+- Java-tron Event Subscription (ZeroMQ, `--es`, `bindport`, topics): [https://tronprotocol.github.io/documentation-en/architecture/event/](https://tronprotocol.github.io/documentation-en/architecture/event/)
+- TRONGrid endpoints (Mainnet/Shasta/Nile): [https://developers.tron.network/v4.7.3/docs/exchangewallet-integrate-with-the-tron-network](https://developers.tron.network/v4.7.3/docs/exchangewallet-integrate-with-the-tron-network)
 
 ---
 
 ## License
+
 MIT
