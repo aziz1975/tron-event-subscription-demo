@@ -1,15 +1,18 @@
 const zmq = require("zeromq");
-const socket = zmq.socket("sub");
 
-socket.connect("tcp://127.0.0.1:5555");
+async function watchTransactions() {
+  const socket = new zmq.Subscriber();
 
-// should match the topic name configured in config-nile.conf
-socket.subscribe("transaction");
+  socket.connect("tcp://127.0.0.1:5555");
+  socket.subscribe("transaction");
 
-console.log("Subscribed to transaction events on tcp://127.0.0.1:5555");
+  console.log("Subscribed to transaction events on tcp://127.0.0.1:5555");
 
-socket.on("message", (topic, message) => {
-  console.log("topic:", topic.toString());
-  console.log("msg:", message.toString());
-  console.log("----");
-});
+  for await (const [topic, message] of socket) {
+    console.log("topic:", topic.toString());
+    console.log("msg:", message.toString());
+    console.log("----");
+  }
+}
+
+watchTransactions().catch(console.error);
