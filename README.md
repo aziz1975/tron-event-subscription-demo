@@ -29,7 +29,7 @@ You can extend the same pattern to **contract logs** (for TRC20 deposits like US
 
 ### Subscriber side
 
-- Node.js 20+
+- Node.js 22+
 - `zeromq@6` 
 
 ---
